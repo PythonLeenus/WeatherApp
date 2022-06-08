@@ -11,10 +11,6 @@ data class Daily(
     @SerializedName("feels_like")
     val feelsLike: FeelsLike,
     val humidity: Int,
-    @SerializedName("moon_phase")
-    val moonPhase: Double,
-    val moonrise: Int,
-    val moonset: Int,
     val pop: Double,
     val pressure: Int,
     val rain: Double,
