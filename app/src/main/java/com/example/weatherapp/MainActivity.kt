@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 //<----Codes for Google autocomplete Fragment. More here: https://developers.google.cn/maps/documentation/places/android-sdk/autocomplete--->
-        Places.initialize(getApplicationContext(), googleApi)
+        Places.initialize(applicationContext, googleApi)
         placesClient = Places.createClient(this)
         // Initialize the AutocompleteSupportFragment.
         val autocompleteFragment =
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         vm.currentWeather.observe(this) {
             val gson = GsonBuilder().setPrettyPrinting().create()
             val pJson = gson.toJson(it)
-//            println(pJson)
+            println(pJson)
             tv_date_and_time.text = SimpleDateFormat("dd MMMM yyyy hh:mm a").format(Date())
             tv_day_max_temp.text = "Max " + it.daily[0].temp.max.toString() + "º"
             tv_day_min_temp.text = "Min " + it.daily[0].temp.min.toString() + "º"
