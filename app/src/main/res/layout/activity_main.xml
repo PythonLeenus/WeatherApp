@@ -24,6 +24,8 @@
             android:layout_marginStart="25dp"
             android:orientation="vertical">
 
+
+<!--            Added this fragment for Google autocomplete         -->
             <fragment android:id="@+id/autocomplete_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

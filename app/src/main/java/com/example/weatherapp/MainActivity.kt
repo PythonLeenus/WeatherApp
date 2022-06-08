@@ -43,18 +43,10 @@ class MainActivity : AppCompatActivity() {
             var longitude = it.location.lng.toString()
 
             vm.getCurrentCity("$latitude+$longitude", openCageDataKey)
-            vm.currentCity.observe(this){
-                var city = it.results[0].components.city
-                if(city == null) city = it.results[0].components.county
-                var state = it.results[0].components.state
-                var country = it.results[0].components.country
-                var placeName = "$city, $state, $country"
-                tv_city_name.text = placeName
-            }
-
             vm.getCurrentWeather(latitude, longitude, weatherApiKey, units)
         }
-//<----Code for Google autocomplete Fragment. More here: https://developers.google.cn/maps/documentation/places/android-sdk/autocomplete--->
+
+//<----Codes for Google autocomplete Fragment. More here: https://developers.google.cn/maps/documentation/places/android-sdk/autocomplete--->
         Places.initialize(getApplicationContext(), googleApi)
         placesClient = Places.createClient(this)
         // Initialize the AutocompleteSupportFragment.
@@ -81,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                 println("An error occurred: $status")
             }
         })
-//        <---End of Code for Google autocomplete Fragment --->
+//        <---End of Codes for Google autocomplete Fragment --->
 
 
 
@@ -89,13 +81,21 @@ class MainActivity : AppCompatActivity() {
             val gson = GsonBuilder().setPrettyPrinting().create()
             val pJson = gson.toJson(it)
 //            println(pJson)
-
             tv_date_and_time.text = SimpleDateFormat("dd/M/yyyy hh:mm a").format(Date())
             tv_day_max_temp.text = "Max " + it.daily[0].temp.max.toString() + "º"
             tv_day_min_temp.text = "Min " + it.daily[0].temp.min.toString() + "º"
             tv_current_temp.text = it.current.temp.toString() + "º"
             tv_feels_like.text = "Feels like " + it.current.feelsLike.toString() + "º"
             tv_weather_type.text = it.current.weather[0].description.capitalize()
+        }
+
+        vm.currentCity.observe(this){
+            var city = it.results[0].components.city
+            if(city == null) city = it.results[0].components.county
+            var state = it.results[0].components.state
+            var country = it.results[0].components.country
+            var placeName = "$city, $state, $country"
+            tv_city_name.text = placeName
         }
 
     }
