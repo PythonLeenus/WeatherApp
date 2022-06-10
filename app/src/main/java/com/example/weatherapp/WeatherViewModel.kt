@@ -1,9 +1,14 @@
 package com.example.weatherapp
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.weatherapp.APIResponse.AllWeather
+import androidx.lifecycle.viewModelScope
+import com.example.weatherapp.DataBase.AllWeatherEntity
+import com.example.weatherapp.DataBase.CityLatLong
+import com.example.weatherapp.DataBase.PlaceName
 import com.example.weatherapp.GeolocationApi.Geolocation
+import com.example.weatherapp.OpenWeatherAPI.AllWeather
 import com.example.weatherapp.ReverseGeocoding.CurrentCity
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
@@ -14,6 +19,14 @@ class WeatherViewModel(val repo: WeatherRepository) : ViewModel() {
     var currentWeather = MutableLiveData<AllWeather>()
     var currentLocation = MutableLiveData<Geolocation>()
     var currentCity = MutableLiveData<CurrentCity>()
+
+    val getAllWeather : LiveData<AllWeatherEntity>
+    val getLatLong : LiveData<CityLatLong>
+
+    init {
+        getAllWeather = repo.getAllWeather()
+        getLatLong = repo.getLatLong()
+    }
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
         throwable.printStackTrace()
@@ -49,5 +62,23 @@ class WeatherViewModel(val repo: WeatherRepository) : ViewModel() {
             }
 
         }
+    }
+
+    fun insertWeather(weather: AllWeatherEntity) = viewModelScope.launch{
+        repo.insertWeather(weather)
+    }
+
+
+    fun insertLatLong(cityLatLong: CityLatLong) = viewModelScope.launch {
+        repo.insertLatLong(cityLatLong)
+    }
+
+
+    fun getPlaceName() = repo.getPlaceName()
+
+
+
+    fun insertPlaceName(placeName: PlaceName) = viewModelScope.launch {
+        repo.insertPlaceName(placeName)
     }
 }

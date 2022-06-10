@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android-extensions'
-    id 'maven-publish'
+    id 'kotlin-kapt'
 }
 
 
@@ -55,6 +55,20 @@ dependencies {
 //    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
+
+    // To refresh page
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    def room_version = "2.4.2"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+
 
 
 
