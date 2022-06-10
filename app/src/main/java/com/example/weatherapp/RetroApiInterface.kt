@@ -1,12 +1,14 @@
 package com.example.weatherapp
 
-import com.example.weatherapp.APIResponse.AllWeather
 import com.example.weatherapp.GeolocationApi.Geolocation
 import com.example.weatherapp.ReverseGeocoding.CurrentCity
+import com.example.weatherapp.OpenWeatherAPI.AllWeather
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Query
 
 
 interface RetroApiInterface {
